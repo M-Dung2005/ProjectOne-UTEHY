@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.guna2GroupBox2 = new Guna.UI2.WinForms.Guna2GroupBox();
             this.lvDanhSachHoaDon = new System.Windows.Forms.ListView();
-            this.STT = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -133,7 +132,6 @@
             this.lvDanhSachHoaDon.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.lvDanhSachHoaDon.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.lvDanhSachHoaDon.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.STT,
             this.columnHeader2,
             this.columnHeader5,
             this.columnHeader6,
@@ -154,14 +152,9 @@
             this.lvDanhSachHoaDon.View = System.Windows.Forms.View.Details;
             this.lvDanhSachHoaDon.SelectedIndexChanged += new System.EventHandler(this.lvDanhSachHoaDon_SelectedIndexChanged);
             // 
-            // STT
-            // 
-            this.STT.Text = "STT";
-            this.STT.Width = 61;
-            // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Số HDX";
+            this.columnHeader2.Text = "Mã HDX";
             this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader2.Width = 140;
             // 
@@ -271,6 +264,7 @@
             this.btnChitietHD.Size = new System.Drawing.Size(177, 55);
             this.btnChitietHD.TabIndex = 27;
             this.btnChitietHD.Text = "Chi tiết HĐ";
+            this.btnChitietHD.Click += new System.EventHandler(this.btnChitietHD_Click);
             // 
             // guna2Button3
             // 
@@ -341,7 +335,7 @@
             this.btnThemHD.Size = new System.Drawing.Size(177, 55);
             this.btnThemHD.TabIndex = 34;
             this.btnThemHD.Text = "Thêm HĐ";
-            this.btnThemHD.Click += new System.EventHandler(this.btnThem_Click);
+            this.btnThemHD.Click += new System.EventHandler(this.btnThemHD_Click);
             // 
             // btnXoa
             // 
@@ -488,16 +482,16 @@
             // 
             // dgvDanhsachhoadonnhap
             // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.dgvDanhsachhoadonnhap.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Nunito", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDanhsachhoadonnhap.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            this.dgvDanhsachhoadonnhap.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Nunito", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDanhsachhoadonnhap.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvDanhsachhoadonnhap.ColumnHeadersHeight = 40;
             this.dgvDanhsachhoadonnhap.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -505,14 +499,14 @@
             this.Column3,
             this.Column4,
             this.Column5});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Nunito", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDanhsachhoadonnhap.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Nunito", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDanhsachhoadonnhap.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgvDanhsachhoadonnhap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDanhsachhoadonnhap.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvDanhsachhoadonnhap.Location = new System.Drawing.Point(0, 40);
@@ -638,6 +632,7 @@
             this.btnChitiet.TabIndex = 5;
             this.btnChitiet.Text = "Chi tiết ";
             this.btnChitiet.UseTransparentBackground = true;
+            this.btnChitiet.Click += new System.EventHandler(this.btnChitiet_Click);
             // 
             // btnSua
             // 
@@ -824,7 +819,6 @@
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox1;
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox2;
         private System.Windows.Forms.ListView lvDanhSachHoaDon;
-        private System.Windows.Forms.ColumnHeader STT;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;

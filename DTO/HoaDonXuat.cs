@@ -11,7 +11,7 @@ namespace DTO
         public int MaHDX;
         public int MaKH;
         public int MaNV;
-        public DateTime NgayLap;
+        public DateTime NgayTao;
         public decimal TongTien;
     }
 }

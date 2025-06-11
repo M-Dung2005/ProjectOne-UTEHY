@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Security.Cryptography;
 using System.Windows.Forms;
+using DTO;
 using QLST.Controls;
 
 namespace QLST
@@ -17,6 +18,8 @@ namespace QLST
         UserControl ucBanHang;
         UserControl ucThanhToan = new UCThanhToan();
         UserControl ucChiTietHoaDonNhap = new UCChitiethoadonNhap();
+        UserControl ucChiTietHoaDonXuat = new UCChitiethoadonxuat();
+        UserControl ucNhapHang = new UCNhapHang();
         public frmMain(string tenTK, string quyen)
         {
             InitializeComponent();
@@ -24,12 +27,52 @@ namespace QLST
             tkLabel.Text = tenTK;
             quyenLabel.Text = quyen;
             ucBanHang = new UCBanHang();
-           
+            ((UCBanHang)ucBanHang).InvoiceCreated += FrmMain_InvoiceCreated;
+
+        }
+
+        public void ShowChiTietHoaDonXuat(int maHDX)
+        {
+            HideUCtrl();
+            // Gọi phương thức LoadData để nạp dữ liệu mới
+            ((UCChitiethoadonxuat)ucChiTietHoaDonXuat).LoadData(maHDX);
+            ucChiTietHoaDonXuat.Show(); // ucChiTietHoaDonXuat đã được khai báo ở đầu frmMain
+        }
+        public void ShowChiTietHoaDonNhap(int maHDX)
+        {
+            HideUCtrl();
+            // Gọi phương thức LoadData để nạp dữ liệu mới
+            ((UCChitiethoadonNhap)ucChiTietHoaDonNhap).LoadData(maHDX);
+            ucChiTietHoaDonNhap.Show(); // ucChiTietHoaDonXuat đã được khai báo ở đầu frmMain
+        }
+
+        public void ChuyenTabBanHang()
+        {
+            // Code này lặp lại logic của nút btnBanHang_Click
+            HideUCtrl();
+            ucBanHang.Show();
+        }
+
+        // Đây là phương thức sẽ được chạy khi hóa đơn được tạo thành công
+        private void FrmMain_InvoiceCreated(object sender, EventArgs e)
+        {
+            // Ra lệnh cho ucHoaDon phải tải lại dữ liệu
+            // Cần ép kiểu ucHoaDon về đúng loại của nó (UCHoaDon)
+            ((UCHoaDon)ucHoaDon).RefreshData();
+
+            // Tùy chọn: Tự động chuyển người dùng đến tab Hóa đơn để xem kết quả
+            btnHoaDon.PerformClick();
         }
 
         public frmMain()
         {
             InitializeComponent();
+        }
+
+        public void ShowNhapHangView()
+        {
+            HideUCtrl();        // Ẩn tất cả các control khác
+            ucNhapHang.Show();  // Chỉ hiển thị giao diện nhập hàng
         }
 
 
@@ -65,6 +108,8 @@ namespace QLST
             clientArea.Controls.Add(ucBanHang);
             clientArea.Controls.Add(ucThanhToan);
             clientArea.Controls.Add(ucChiTietHoaDonNhap);
+            clientArea.Controls.Add(ucChiTietHoaDonXuat);
+            clientArea.Controls.Add(ucNhapHang);
             HideUCtrl();
         }
 

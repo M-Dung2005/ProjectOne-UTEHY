@@ -19,7 +19,7 @@ namespace BLL
             string sql = @"
             SELECT 
                 hd.MaHDX, 
-                hd.NgayLap, 
+                hd.NgayTao, 
                 nv.TenNV,
                 kh.TenKH,
                 hd.TongTien
@@ -34,21 +34,40 @@ namespace BLL
             return dt;
         }
 
-
-
-        public bool ThemHoaDonXuat(HoaDonXuat hd)
+        public int ThemHoaDonXuat(HoaDonXuat hd)
         {
             db.OpenDB();
-            string sql = "INSERT INTO HoaDonXuat (MaHDX, NgayLap, MaNV, MaKH, TongTien) VALUES (@MaHDX, @NgayLap, @MaNV, @MaKH, @TongTien)";
+            // Bỏ MaHDX khỏi câu lệnh INSERT và thêm "SELECT SCOPE_IDENTITY()" để lấy mã vừa tạo
+            string sql = "INSERT INTO HoaDonXuat (NgayTao, MaNV, MaKH, TongTien) VALUES (@NgayTao, @MaNV, @MaKH, @TongTien); SELECT SCOPE_IDENTITY();";
+
             SqlCommand cmd = new SqlCommand(sql, db.conn);
-            cmd.Parameters.AddWithValue("@MaHDX", hd.MaHDX);
-            cmd.Parameters.AddWithValue("@NgayLap", hd.NgayLap);
+            // Không thêm tham số @MaHDX nữa
+            cmd.Parameters.AddWithValue("@NgayTao", hd.NgayTao);
             cmd.Parameters.AddWithValue("@MaNV", hd.MaNV);
             cmd.Parameters.AddWithValue("@MaKH", hd.MaKH);
             cmd.Parameters.AddWithValue("@TongTien", hd.TongTien);
-            int rows = cmd.ExecuteNonQuery();
-            db.CloseDB();
-            return rows > 0;
+
+            // Dùng ExecuteScalar để nhận về giá trị đơn (là mã hóa đơn mới)
+            object result = null;
+            try
+            {
+                result = cmd.ExecuteScalar();
+            }
+            catch (Exception)
+            {
+                // Xử lý lỗi nếu có
+            }
+            finally
+            {
+                db.CloseDB();
+            }
+
+            if (result != null)
+            {
+                return Convert.ToInt32(result); // Trả về mã hóa đơn mới
+            }
+
+            return 0; // Trả về 0 nếu thất bại
         }
 
 

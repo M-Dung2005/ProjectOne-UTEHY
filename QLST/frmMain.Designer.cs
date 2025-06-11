@@ -30,15 +30,11 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.hệThốngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoutToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.giớiThiệuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trợGiúpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.quyenLabel = new System.Windows.Forms.Label();
-            this.quyenLabelTitle = new System.Windows.Forms.Label();
-            this.tkLabel = new System.Windows.Forms.Label();
-            this.tkLabelTitle = new System.Windows.Forms.Label();
-            this.clientArea = new System.Windows.Forms.Panel();
             this.btnBanHang = new Guna.UI2.WinForms.Guna2Button();
             this.btnHoaDon = new Guna.UI2.WinForms.Guna2Button();
             this.btnHangHoa = new Guna.UI2.WinForms.Guna2Button();
@@ -46,8 +42,12 @@
             this.btnKhachHang = new Guna.UI2.WinForms.Guna2Button();
             this.btnNhanVien = new Guna.UI2.WinForms.Guna2Button();
             this.btnQLUser = new Guna.UI2.WinForms.Guna2Button();
-            this.logoutToolStrip = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.quyenLabel = new System.Windows.Forms.Label();
+            this.quyenLabelTitle = new System.Windows.Forms.Label();
+            this.tkLabel = new System.Windows.Forms.Label();
+            this.tkLabelTitle = new System.Windows.Forms.Label();
+            this.clientArea = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -78,6 +78,22 @@
             this.hệThốngToolStripMenuItem.Size = new System.Drawing.Size(95, 27);
             this.hệThốngToolStripMenuItem.Text = "Hệ thống";
             // 
+            // logoutToolStrip
+            // 
+            this.logoutToolStrip.Image = global::QLST.Properties.Resources.door_open_house_exit;
+            this.logoutToolStrip.Name = "logoutToolStrip";
+            this.logoutToolStrip.Size = new System.Drawing.Size(174, 28);
+            this.logoutToolStrip.Text = "Đăng xuất";
+            this.logoutToolStrip.Click += new System.EventHandler(this.logoutToolStrip_Click);
+            // 
+            // exitToolStrip
+            // 
+            this.exitToolStrip.Image = global::QLST.Properties.Resources.exit;
+            this.exitToolStrip.Name = "exitToolStrip";
+            this.exitToolStrip.Size = new System.Drawing.Size(174, 28);
+            this.exitToolStrip.Text = "Thoát";
+            this.exitToolStrip.Click += new System.EventHandler(this.exitToolStrip_Click);
+            // 
             // giớiThiệuToolStripMenuItem
             // 
             this.giớiThiệuToolStripMenuItem.Name = "giớiThiệuToolStripMenuItem";
@@ -105,70 +121,6 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(307, 741);
             this.flowLayoutPanel1.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.quyenLabel);
-            this.panel1.Controls.Add(this.quyenLabelTitle);
-            this.panel1.Controls.Add(this.tkLabel);
-            this.panel1.Controls.Add(this.tkLabelTitle);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 772);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1527, 42);
-            this.panel1.TabIndex = 2;
-            // 
-            // quyenLabel
-            // 
-            this.quyenLabel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.quyenLabel.Font = new System.Drawing.Font("Nunito", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quyenLabel.Location = new System.Drawing.Point(407, 0);
-            this.quyenLabel.Name = "quyenLabel";
-            this.quyenLabel.Size = new System.Drawing.Size(213, 42);
-            this.quyenLabel.TabIndex = 4;
-            this.quyenLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // quyenLabelTitle
-            // 
-            this.quyenLabelTitle.Dock = System.Windows.Forms.DockStyle.Left;
-            this.quyenLabelTitle.Font = new System.Drawing.Font("Nunito", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quyenLabelTitle.Location = new System.Drawing.Point(307, 0);
-            this.quyenLabelTitle.Name = "quyenLabelTitle";
-            this.quyenLabelTitle.Size = new System.Drawing.Size(100, 42);
-            this.quyenLabelTitle.TabIndex = 2;
-            this.quyenLabelTitle.Text = "Quyền :";
-            this.quyenLabelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // tkLabel
-            // 
-            this.tkLabel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tkLabel.Font = new System.Drawing.Font("Nunito", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tkLabel.Location = new System.Drawing.Point(123, 0);
-            this.tkLabel.Name = "tkLabel";
-            this.tkLabel.Size = new System.Drawing.Size(184, 42);
-            this.tkLabel.TabIndex = 3;
-            this.tkLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // tkLabelTitle
-            // 
-            this.tkLabelTitle.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tkLabelTitle.Font = new System.Drawing.Font("Nunito", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tkLabelTitle.Location = new System.Drawing.Point(0, 0);
-            this.tkLabelTitle.Name = "tkLabelTitle";
-            this.tkLabelTitle.Size = new System.Drawing.Size(123, 42);
-            this.tkLabelTitle.TabIndex = 0;
-            this.tkLabelTitle.Text = "Tài khoản :";
-            this.tkLabelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // clientArea
-            // 
-            this.clientArea.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clientArea.Location = new System.Drawing.Point(307, 31);
-            this.clientArea.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.clientArea.Name = "clientArea";
-            this.clientArea.Size = new System.Drawing.Size(1220, 741);
-            this.clientArea.TabIndex = 3;
             // 
             // btnBanHang
             // 
@@ -331,21 +283,69 @@
             this.btnQLUser.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnQLUser.Click += new System.EventHandler(this.btnQLUser_Click);
             // 
-            // logoutToolStrip
+            // panel1
             // 
-            this.logoutToolStrip.Image = global::QLST.Properties.Resources.door_open_house_exit;
-            this.logoutToolStrip.Name = "logoutToolStrip";
-            this.logoutToolStrip.Size = new System.Drawing.Size(174, 28);
-            this.logoutToolStrip.Text = "Đăng xuất";
-            this.logoutToolStrip.Click += new System.EventHandler(this.logoutToolStrip_Click);
+            this.panel1.Controls.Add(this.quyenLabel);
+            this.panel1.Controls.Add(this.quyenLabelTitle);
+            this.panel1.Controls.Add(this.tkLabel);
+            this.panel1.Controls.Add(this.tkLabelTitle);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 772);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1527, 42);
+            this.panel1.TabIndex = 2;
             // 
-            // exitToolStrip
+            // quyenLabel
             // 
-            this.exitToolStrip.Image = global::QLST.Properties.Resources.exit;
-            this.exitToolStrip.Name = "exitToolStrip";
-            this.exitToolStrip.Size = new System.Drawing.Size(174, 28);
-            this.exitToolStrip.Text = "Thoát";
-            this.exitToolStrip.Click += new System.EventHandler(this.exitToolStrip_Click);
+            this.quyenLabel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.quyenLabel.Font = new System.Drawing.Font("Nunito", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quyenLabel.Location = new System.Drawing.Point(407, 0);
+            this.quyenLabel.Name = "quyenLabel";
+            this.quyenLabel.Size = new System.Drawing.Size(213, 42);
+            this.quyenLabel.TabIndex = 4;
+            this.quyenLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // quyenLabelTitle
+            // 
+            this.quyenLabelTitle.Dock = System.Windows.Forms.DockStyle.Left;
+            this.quyenLabelTitle.Font = new System.Drawing.Font("Nunito", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quyenLabelTitle.Location = new System.Drawing.Point(307, 0);
+            this.quyenLabelTitle.Name = "quyenLabelTitle";
+            this.quyenLabelTitle.Size = new System.Drawing.Size(100, 42);
+            this.quyenLabelTitle.TabIndex = 2;
+            this.quyenLabelTitle.Text = "Quyền :";
+            this.quyenLabelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tkLabel
+            // 
+            this.tkLabel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tkLabel.Font = new System.Drawing.Font("Nunito", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tkLabel.Location = new System.Drawing.Point(123, 0);
+            this.tkLabel.Name = "tkLabel";
+            this.tkLabel.Size = new System.Drawing.Size(184, 42);
+            this.tkLabel.TabIndex = 3;
+            this.tkLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tkLabelTitle
+            // 
+            this.tkLabelTitle.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tkLabelTitle.Font = new System.Drawing.Font("Nunito", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tkLabelTitle.Location = new System.Drawing.Point(0, 0);
+            this.tkLabelTitle.Name = "tkLabelTitle";
+            this.tkLabelTitle.Size = new System.Drawing.Size(123, 42);
+            this.tkLabelTitle.TabIndex = 0;
+            this.tkLabelTitle.Text = "Tài khoản :";
+            this.tkLabelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // clientArea
+            // 
+            this.clientArea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clientArea.Location = new System.Drawing.Point(307, 31);
+            this.clientArea.Margin = new System.Windows.Forms.Padding(4);
+            this.clientArea.Name = "clientArea";
+            this.clientArea.Size = new System.Drawing.Size(1220, 741);
+            this.clientArea.TabIndex = 3;
             // 
             // frmMain
             // 

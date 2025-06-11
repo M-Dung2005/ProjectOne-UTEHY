@@ -18,6 +18,9 @@ namespace QLST.Controls
         public UCQLUser()
         {
             InitializeComponent();
+            // Vô hiệu hóa ô nhập mã tài khoản
+            txtMaTK.Enabled = false;
+            txtMaTK.PlaceholderText = "Mã tự động";
             HienThiUserLenListView(); // Gọi hàm để hiển thị danh sách nhân viên khi khởi động
         }
 
@@ -51,35 +54,32 @@ namespace QLST.Controls
         // Xử lý sự kiện thêm nhân viên
         private void btnThem_Click(object sender, EventArgs e)
         {
-            // Kiểm tra xem các trường thông tin đã được nhập đầy đủ chưa
-            if ( string.IsNullOrWhiteSpace(txtTendangnhap.Text) || string.IsNullOrWhiteSpace(txtMatkhau.Text))
+            if (string.IsNullOrWhiteSpace(txtTendangnhap.Text) || string.IsNullOrWhiteSpace(txtMatkhau.Text))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
                 return;
             }
 
-            // Gọi phương thức thêm người dùng từ BLL
-            bool kq = bllQLUser.ThemUsers(new DTO.TaiKhoan
+            // Tạo đối tượng TaiKhoan mà không cần MaTK
+            TaiKhoan user = new TaiKhoan
             {
-                MaTK = int.Parse(txtMaTK.Text),
                 TenDangNhap = txtTendangnhap.Text,
                 MatKhau = txtMatkhau.Text,
                 QuyenHan = cmbQuyen.Text
-            });
+            };
 
-            if (kq)
+            string errorMessage = bllQLUser.ThemUsers(user);
+
+            if (errorMessage == null)
             {
                 MessageBox.Show("Thêm người dùng thành công!");
-                HienThiUserLenListView(); // Cập nhật danh sách người dùng
+                HienThiUserLenListView();
                 ClearInputFields();
             }
             else
             {
-                MessageBox.Show("Thêm người dùng thất bại!");
+                MessageBox.Show(errorMessage, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
-
         }
         // Xóa nội dung trong các TextBox và ComboBox
         private void ClearInputFields()

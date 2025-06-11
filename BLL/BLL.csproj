@@ -57,10 +57,14 @@
     <Compile Include="BLL_Chitiethoadonnhap.cs" />
     <Compile Include="BLL_Chitiethoadonxuat.cs" />
     <Compile Include="BLL_HangHoa.cs" />
+    <Compile Include="BLL_HoaDonNhap.cs" />
     <Compile Include="BLL_HoaDonXuat.cs" />
+    <Compile Include="BLL_LoaiHang.cs" />
+    <Compile Include="BLL_NhaCungCap.cs" />
     <Compile Include="BLL_QLKH.cs" />
     <Compile Include="BLL_QLNV.cs" />
     <Compile Include="BLL_QLUsers.cs" />
+    <Compile Include="BLL_ThongKe.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

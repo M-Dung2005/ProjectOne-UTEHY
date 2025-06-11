@@ -17,6 +17,8 @@ namespace QLST.Controls
         public UCQLNV()
         {
             InitializeComponent();
+            txtMaNV.Enabled = false;
+            txtMaNV.PlaceholderText = "Mã tự động";
             HienThiNhanVienLenListView(); // Gọi hàm để hiển thị danh sách nhân viên khi khởi động
         }
 
@@ -70,31 +72,32 @@ namespace QLST.Controls
         // Xử lý sự kiện thêm nhân viên
         private void btnThem_Click(object sender, EventArgs e)
         {
-            string maNV = txtMaNV.Text;
+            // Bỏ MaNV khỏi các biến và kiểm tra
             string tenNV = txtTenNV.Text;
-            string SoDienThoai = txtSĐT.Text;
-            string DiaChi = txtDiachi.Text;
-            string NgaySinh = dtpNgaysinh.Value.ToString("yyyy-MM-dd");
-            string GioiTinh = cmbGioiTinh.Text;
-            int.TryParse(txtMaTK.Text, out int maTK); 
+            string soDienThoai = txtSĐT.Text;
+            string diaChi = txtDiachi.Text;
+            string ngaySinh = dtpNgaysinh.Value.ToString("yyyy-MM-dd");
+            string gioiTinh = cmbGioiTinh.Text;
+            int.TryParse(txtMaTK.Text, out int maTK);
 
-            if (string.IsNullOrWhiteSpace(maNV) || string.IsNullOrWhiteSpace(tenNV) || string.IsNullOrWhiteSpace(SoDienThoai) || string.IsNullOrWhiteSpace(DiaChi) || string.IsNullOrWhiteSpace(GioiTinh))
+            if (string.IsNullOrWhiteSpace(tenNV) || string.IsNullOrWhiteSpace(soDienThoai) || string.IsNullOrWhiteSpace(diaChi) || string.IsNullOrWhiteSpace(gioiTinh))
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin và đúng định dạng!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
                 return;
             }
 
-            bool kq = bllQLNV.ThemNhanVien(maNV, tenNV, SoDienThoai, DiaChi, GioiTinh, NgaySinh,maTK);
+            // Gọi phương thức mới không cần MaNV
+            string errorMessage = bllQLNV.ThemNhanVien(tenNV, soDienThoai, diaChi, gioiTinh, ngaySinh, maTK);
 
-            if (kq)
+            if (errorMessage == null)
             {
                 MessageBox.Show("Thêm nhân viên thành công!");
-                HienThiNhanVienLenListView(); // Làm mới danh sách
+                HienThiNhanVienLenListView();
                 ClearInputFields();
             }
             else
             {
-                MessageBox.Show("Thêm nhân viên thất bại!");
+                MessageBox.Show(errorMessage, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }

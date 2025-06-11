@@ -177,9 +177,7 @@
             this.cmbQuyen.ItemHeight = 30;
             this.cmbQuyen.Items.AddRange(new object[] {
             "Admin",
-            "Kế toán",
-            "Nhân viên kho",
-            "Thu Ngân"});
+            "Nhân Viên"});
             this.cmbQuyen.Location = new System.Drawing.Point(176, 222);
             this.cmbQuyen.Margin = new System.Windows.Forms.Padding(4);
             this.cmbQuyen.Name = "cmbQuyen";

@@ -82,6 +82,12 @@
     <Compile Include="Controls\UCHoaDon.Designer.cs">
       <DependentUpon>UCHoaDon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UCNhapHang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UCNhapHang.Designer.cs">
+      <DependentUpon>UCNhapHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UCQLKH.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -140,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\UCHoaDon.resx">
       <DependentUpon>UCHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UCNhapHang.resx">
+      <DependentUpon>UCNhapHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\UCQLKH.resx">
       <DependentUpon>UCQLKH.cs</DependentUpon>

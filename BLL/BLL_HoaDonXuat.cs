@@ -25,14 +25,16 @@ namespace BLL
                 hd.NgayTao, 
                 nv.TenNV AS TenNhanVien,
                 kh.TenKH AS TenKhachHang,
+                hd.MaNV,  
+                hd.MaKH,   
                 SUM(ct.SoLuong * ct.DonGia) AS TongTien
             FROM HoaDonXuat hd
             JOIN NhanVien nv ON hd.MaNV = nv.MaNV
             JOIN KhachHang kh ON hd.MaKH = kh.MaKH
             JOIN ChiTietHoaDonXuat ct ON hd.MaHDX = ct.MaHDX
-            GROUP BY hd.MaHDX, hd.NgayTao, nv.TenNV, kh.TenKH";
+            GROUP BY hd.MaHDX, hd.NgayTao, nv.TenNV, kh.TenKH, hd.MaNV, hd.MaKH";
 
-                SqlCommand cmd = new SqlCommand(sql, db.conn);
+            SqlCommand cmd = new SqlCommand(sql, db.conn);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -46,10 +48,10 @@ namespace BLL
             db.OpenDB();
 
             // 1. Thêm hóa đơn (chưa có Tổng Tiền)
-            string sqlInsert = "INSERT INTO HoaDonXuat (MaHDX, NgayLap, MaNV, MaKH) VALUES (@MaHDX, @NgayLap, @MaNV, @MaKH)";
+            string sqlInsert = "INSERT INTO HoaDonXuat (MaHDX, NgayTao, MaNV, MaKH) VALUES (@MaHDX, @NgayTao, @MaNV, @MaKH)";
             SqlCommand cmdInsert = new SqlCommand(sqlInsert, db.conn);
             cmdInsert.Parameters.AddWithValue("@MaHDX", hd.MaHDX);
-            cmdInsert.Parameters.AddWithValue("@NgayLap", hd.NgayLap);
+            cmdInsert.Parameters.AddWithValue("@NgayTao", hd.NgayTao);
             cmdInsert.Parameters.AddWithValue("@MaNV", hd.MaNV);
             cmdInsert.Parameters.AddWithValue("@MaKH", hd.MaKH);
             int rows = cmdInsert.ExecuteNonQuery();
@@ -91,10 +93,10 @@ namespace BLL
         public bool CapNhatHoaDonXuat(HoaDonXuat hd)
         {
             db.OpenDB();
-            string sql = "UPDATE HoaDonXuat SET NgayLap = @NgayLap, MaNV = @MaNV, MaKH = @MaKH WHERE MaHDX = @MaHDX";
+            string sql = "UPDATE HoaDonXuat SET NgayTao = @NgayTao, MaNV = @MaNV, MaKH = @MaKH WHERE MaHDX = @MaHDX";
             SqlCommand cmd = new SqlCommand(sql, db.conn);
             cmd.Parameters.AddWithValue("@MaHDX", hd.MaHDX);
-            cmd.Parameters.AddWithValue("@NgayLap", hd.NgayLap);
+            cmd.Parameters.AddWithValue("@NgayTao", hd.NgayTao);
             cmd.Parameters.AddWithValue("@MaNV", hd.MaNV);
             cmd.Parameters.AddWithValue("@MaKH", hd.MaKH);
             int rows = cmd.ExecuteNonQuery();

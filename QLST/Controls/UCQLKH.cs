@@ -17,6 +17,8 @@ namespace QLST.Controls
         public UCQLKH()
         {
             InitializeComponent();
+            txtMaKH.Enabled = false;
+            txtMaKH.PlaceholderText = "Mã tự động";
             HienThiKhachHangLenListView(); // Gọi hàm để hiển thị danh sách khách hàng khi khởi động
         }
 
@@ -53,27 +55,30 @@ namespace QLST.Controls
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            string maKH = txtMaKH.Text;
+            // Bỏ MaKH khỏi các biến và kiểm tra
             string tenKH = txtTenKH.Text;
             string diaChi = txtDiachi.Text;
             string soDienThoai = txtSodienthoai.Text;
             string gioiTinh = cmbGioitinh.Text;
-            // Kiểm tra xem các trường thông tin có hợp lệ không
-            if (string.IsNullOrWhiteSpace(maKH) || string.IsNullOrWhiteSpace(tenKH) || string.IsNullOrWhiteSpace(diaChi) || string.IsNullOrWhiteSpace(soDienThoai) || string.IsNullOrWhiteSpace(gioiTinh))
+
+            if (string.IsNullOrWhiteSpace(tenKH) || string.IsNullOrWhiteSpace(diaChi) || string.IsNullOrWhiteSpace(soDienThoai) || string.IsNullOrWhiteSpace(gioiTinh))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
                 return;
             }
-            // Thêm khách hàng vào cơ sở dữ liệu
-            if (bllQLKH.ThemKhachHang(maKH, tenKH, diaChi, soDienThoai, gioiTinh))
+
+            // Gọi phương thức mới không cần MaKH
+            string errorMessage = bllQLKH.ThemKhachHang(tenKH, diaChi, soDienThoai, gioiTinh);
+
+            if (errorMessage == null)
             {
                 MessageBox.Show("Thêm khách hàng thành công!");
-                HienThiKhachHangLenListView(); // Cập nhật danh sách khách hàng
-                ClearInputFields(); // Xóa nội dung trong các TextBox
+                HienThiKhachHangLenListView();
+                ClearInputFields();
             }
             else
             {
-                MessageBox.Show("Thêm khách hàng thất bại!");
+                MessageBox.Show(errorMessage, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

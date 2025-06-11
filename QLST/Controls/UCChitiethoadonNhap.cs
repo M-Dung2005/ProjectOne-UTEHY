@@ -19,13 +19,11 @@ namespace QLST.Controls
         public UCChitiethoadonNhap()
         {
             InitializeComponent();
-            //Hiển thị chi tiết hóa đơn nhập lên dataGridView
-            HienThiChiTietHoaDonNhap();
 
         }
-        private void HienThiChiTietHoaDonNhap()
+        public void LoadData(int MaHDN)
         {
-            DataTable dt = bllChitiethoadonnhap.LayDanhSachChiTietHoaDonNhap();
+            DataTable dt = bllChitiethoadonnhap.LayDanhSachChiTietHoaDonNhap(MaHDN);
             dgvChitiethoadonnhap.DataSource = dt;
             dgvChitiethoadonnhap.Columns["MaHDN"].HeaderText = "Mã Hóa Đơn Nhập";
             dgvChitiethoadonnhap.Columns["TenHang"].HeaderText = "Tên Hàng";
@@ -33,12 +31,5 @@ namespace QLST.Controls
             dgvChitiethoadonnhap.Columns["DonGia"].HeaderText = "Đơn Giá";
             dgvChitiethoadonnhap.Columns["ThanhTien"].HeaderText = "Thành Tiền";
         }
-
-        private DataTable LayDanhSachChiTietHoaDonNhap()
-        {
-            return bllChitiethoadonnhap.LayDanhSachChiTietHoaDonNhap();
-        }
-
-       
     }
 }

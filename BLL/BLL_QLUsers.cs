@@ -15,27 +15,32 @@ namespace BLL
     {
         private readonly Database db = new Database();
         // Thêm người dùng vào cơ sở dữ liệu
-        public bool ThemUsers(TaiKhoan user)
+        public string ThemUsers(TaiKhoan user)
         {
-            db.OpenDB();
-            string sql = "INSERT INTO TaiKhoan (MaTK, TenDangNhap, MatKhau, QuyenHan) VALUES (@MaTK, @TenDangNhap, @Matkhau, @QuyenHan)";
-            SqlCommand cmd = new SqlCommand(sql, db.conn);
-            cmd.Parameters.AddWithValue("@MaTK", user.MaTK);
-            cmd.Parameters.AddWithValue("@TenDangNhap", user.TenDangNhap);
-            cmd.Parameters.AddWithValue("@MatKhau", user.MatKhau);
-            cmd.Parameters.AddWithValue("@QuyenHan", user.QuyenHan);
-
+            // Bỏ MaTK khỏi câu lệnh INSERT
+            string sql = "INSERT INTO TaiKhoan (TenDangNhap, MatKhau, QuyenHan) VALUES (@TenDangNhap, @MatKhau, @QuyenHan)";
             try
             {
-                int rows = cmd.ExecuteNonQuery();
-                db.CloseDB();
-                return rows > 0;
+                db.OpenDB();
+                SqlCommand cmd = new SqlCommand(sql, db.conn);
+                // Không cần tham số @MaTK
+                cmd.Parameters.AddWithValue("@TenDangNhap", user.TenDangNhap);
+                cmd.Parameters.AddWithValue("@MatKhau", user.MatKhau);
+                cmd.Parameters.AddWithValue("@QuyenHan", user.QuyenHan);
+                cmd.ExecuteNonQuery();
+                return null;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                MessageBox.Show("Lỗi khi thêm người dùng: " + ex.Message);
+                if (ex.Number == 2627) // Lỗi UNIQUE
+                {
+                    return $"Lỗi: Tên đăng nhập '{user.TenDangNhap}' đã tồn tại.";
+                }
+                return "Lỗi CSDL: " + ex.Message;
+            }
+            finally
+            {
                 db.CloseDB();
-                return false;
             }
         }
 

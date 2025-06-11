@@ -16,19 +16,34 @@ namespace BLL
     {
         private readonly Database db = new Database();
         // Thêm khách hàng vào cơ sở dữ liệu
-        public bool ThemKhachHang(string MaKH, string TenKH, string DiaChi, string SoDienThoai,string GioiTinh)
+        public string ThemKhachHang(string tenKH, string diaChi, string soDienThoai, string gioiTinh)
         {
-            db.OpenDB();
-            string sql = "INSERT INTO KhachHang (MaKH, TenKH, DiaChi, SoDienThoai, GioiTinh ) VALUES (@MaKH, @TenKH, @DiaChi, @SoDienThoai, @GioiTinh)";
-            SqlCommand cmd = new SqlCommand(sql, db.conn);
-            cmd.Parameters.AddWithValue("@MaKH", MaKH);
-            cmd.Parameters.AddWithValue("@TenKH", TenKH);
-            cmd.Parameters.AddWithValue("@DiaChi", DiaChi);
-            cmd.Parameters.AddWithValue("@SoDienThoai", SoDienThoai);
-            cmd.Parameters.AddWithValue("@GioiTinh", GioiTinh);
-            int rows = cmd.ExecuteNonQuery();
-            db.CloseDB();
-            return rows > 0; // Trả về true nếu thêm thành công
+            // Bỏ MaKH khỏi câu lệnh INSERT
+            string sql = "INSERT INTO KhachHang (TenKH, DiaChi, SoDienThoai, GioiTinh) VALUES (@TenKH, @DiaChi, @SoDienThoai, @GioiTinh)";
+            try
+            {
+                db.OpenDB();
+                SqlCommand cmd = new SqlCommand(sql, db.conn);
+                // Không cần tham số @MaKH nữa
+                cmd.Parameters.AddWithValue("@TenKH", tenKH);
+                cmd.Parameters.AddWithValue("@DiaChi", diaChi);
+                cmd.Parameters.AddWithValue("@SoDienThoai", soDienThoai);
+                cmd.Parameters.AddWithValue("@GioiTinh", gioiTinh);
+                cmd.ExecuteNonQuery();
+                return null; // Thành công
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627) // Lỗi UNIQUE
+                {
+                    return $"Lỗi: Số điện thoại '{soDienThoai}' đã tồn tại.";
+                }
+                return "Lỗi CSDL: " + ex.Message;
+            }
+            finally
+            {
+                db.CloseDB();
+            }
         }
         // Lấy danh sách khách hàng từ cơ sở dữ liệu
         public DataTable LayDanhSachKhachHang()
