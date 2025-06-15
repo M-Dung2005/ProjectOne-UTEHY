@@ -106,12 +106,6 @@
     <Compile Include="Controls\UCQLUser.Designer.cs">
       <DependentUpon>UCQLUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UCThanhToan.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\UCThanhToan.Designer.cs">
-      <DependentUpon>UCThanhToan.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\UCThongKe.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -158,9 +152,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\UCQLUser.resx">
       <DependentUpon>UCQLUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UCThanhToan.resx">
-      <DependentUpon>UCThanhToan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\UCThongKe.resx">
       <DependentUpon>UCThongKe.cs</DependentUpon>

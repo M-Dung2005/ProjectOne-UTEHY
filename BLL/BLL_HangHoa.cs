@@ -177,21 +177,48 @@ namespace BLL
             }
         }
 
-        public bool CapnhatHangHoa(HangHoa hh)
+        public string CapnhatHangHoa(HangHoa hh)
         {
-            string sql = "UPDATE HangHoa SET TenHang = @TenHang, DonVi = @DonVi, MaLoai = @MaLoai, DonGia = @DonGia WHERE MaHang = @MaHang";
-            SqlCommand cmd = new SqlCommand(sql, db.conn);
-            cmd.Parameters.AddWithValue("@MaHang", hh.MaHang);
-            cmd.Parameters.AddWithValue("@TenHang", hh.TenHang);
-            cmd.Parameters.AddWithValue("@MaNCC", hh.MaNCC);
-            cmd.Parameters.AddWithValue("@MaLoai", hh.MaLoai);
-            cmd.Parameters.AddWithValue("@NgaySanXuat", hh.NgaySanXuat);
-            cmd.Parameters.AddWithValue("@HanSuDung", hh.HanSuDung);
-            cmd.Parameters.AddWithValue("@DonGia", hh.DonGia);
-            db.OpenDB();
-            int rows = cmd.ExecuteNonQuery();
-            db.CloseDB();
-            return rows > 0;
+            // Câu lệnh UPDATE này đã được sửa lại để cập nhật đầy đủ các trường
+            string sql = @"UPDATE HangHoa SET 
+                        TenHang = @TenHang, 
+                        MaNCC = @MaNCC, 
+                        MaLoai = @MaLoai, 
+                        NgaySanXuat = @NgaySanXuat, 
+                        HanSuDung = @HanSuDung, 
+                        DonGia = @DonGia 
+                   WHERE MaHang = @MaHang";
+            try
+            {
+                db.OpenDB();
+                SqlCommand cmd = new SqlCommand(sql, db.conn);
+                cmd.Parameters.AddWithValue("@MaHang", hh.MaHang);
+                cmd.Parameters.AddWithValue("@TenHang", hh.TenHang);
+                cmd.Parameters.AddWithValue("@MaNCC", hh.MaNCC);
+                cmd.Parameters.AddWithValue("@MaLoai", hh.MaLoai);
+                cmd.Parameters.AddWithValue("@NgaySanXuat", hh.NgaySanXuat);
+                cmd.Parameters.AddWithValue("@HanSuDung", hh.HanSuDung);
+                cmd.Parameters.AddWithValue("@DonGia", hh.DonGia);
+
+                cmd.ExecuteNonQuery();
+                return null; // Thành công
+            }
+            catch (SqlException ex)
+            {
+                // Bắt lỗi vi phạm ràng buộc khóa ngoại
+                if (ex.Number == 547)
+                {
+                    if (ex.Message.Contains("FK_HangHoa_NhaCungCap"))
+                        return $"Lỗi: Mã nhà cung cấp '{hh.MaNCC}' không tồn tại.";
+                    if (ex.Message.Contains("FK_HangHoa_LoaiHang"))
+                        return $"Lỗi: Mã loại '{hh.MaLoai}' không tồn tại.";
+                }
+                return "Lỗi CSDL khi cập nhật: " + ex.Message;
+            }
+            finally
+            {
+                db.CloseDB();
+            }
         }
 
         public bool XoaHangHoa(string maHang)

@@ -32,8 +32,6 @@
             this.hệThốngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStrip = new System.Windows.Forms.ToolStripMenuItem();
-            this.giớiThiệuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trợGiúpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnBanHang = new Guna.UI2.WinForms.Guna2Button();
             this.btnHoaDon = new Guna.UI2.WinForms.Guna2Button();
@@ -59,9 +57,7 @@
             this.menuStrip1.Font = new System.Drawing.Font("Nunito", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.hệThốngToolStripMenuItem,
-            this.giớiThiệuToolStripMenuItem,
-            this.trợGiúpToolStripMenuItem});
+            this.hệThốngToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -82,7 +78,7 @@
             // 
             this.logoutToolStrip.Image = global::QLST.Properties.Resources.door_open_house_exit;
             this.logoutToolStrip.Name = "logoutToolStrip";
-            this.logoutToolStrip.Size = new System.Drawing.Size(174, 28);
+            this.logoutToolStrip.Size = new System.Drawing.Size(224, 28);
             this.logoutToolStrip.Text = "Đăng xuất";
             this.logoutToolStrip.Click += new System.EventHandler(this.logoutToolStrip_Click);
             // 
@@ -90,21 +86,9 @@
             // 
             this.exitToolStrip.Image = global::QLST.Properties.Resources.exit;
             this.exitToolStrip.Name = "exitToolStrip";
-            this.exitToolStrip.Size = new System.Drawing.Size(174, 28);
+            this.exitToolStrip.Size = new System.Drawing.Size(224, 28);
             this.exitToolStrip.Text = "Thoát";
             this.exitToolStrip.Click += new System.EventHandler(this.exitToolStrip_Click);
-            // 
-            // giớiThiệuToolStripMenuItem
-            // 
-            this.giớiThiệuToolStripMenuItem.Name = "giớiThiệuToolStripMenuItem";
-            this.giớiThiệuToolStripMenuItem.Size = new System.Drawing.Size(96, 27);
-            this.giớiThiệuToolStripMenuItem.Text = "Giới thiệu";
-            // 
-            // trợGiúpToolStripMenuItem
-            // 
-            this.trợGiúpToolStripMenuItem.Name = "trợGiúpToolStripMenuItem";
-            this.trợGiúpToolStripMenuItem.Size = new System.Drawing.Size(86, 27);
-            this.trợGiúpToolStripMenuItem.Text = "Trợ giúp";
             // 
             // flowLayoutPanel1
             // 
@@ -376,8 +360,6 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem hệThốngToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem giớiThiệuToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem trợGiúpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStrip;
         private System.Windows.Forms.ToolStripMenuItem exitToolStrip;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;

@@ -55,30 +55,49 @@ namespace QLST.Controls
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            // Bỏ MaKH khỏi các biến và kiểm tra
+            // --- BẮT ĐẦU PHẦN KIỂM TRA RÀNG BUỘC ---
+
             string tenKH = txtTenKH.Text;
             string diaChi = txtDiachi.Text;
             string soDienThoai = txtSodienthoai.Text;
             string gioiTinh = cmbGioitinh.Text;
 
-            if (string.IsNullOrWhiteSpace(tenKH) || string.IsNullOrWhiteSpace(diaChi) || string.IsNullOrWhiteSpace(soDienThoai) || string.IsNullOrWhiteSpace(gioiTinh))
+            // 1. Ràng buộc "Không được để trống"
+            if (string.IsNullOrWhiteSpace(tenKH) || string.IsNullOrWhiteSpace(diaChi) ||
+                string.IsNullOrWhiteSpace(soDienThoai) || string.IsNullOrWhiteSpace(gioiTinh))
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin khách hàng!", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Gọi phương thức mới không cần MaKH
+            // 2. Ràng buộc "Định dạng Số điện thoại" (theo CSDL của bạn)
+            if (soDienThoai.Length != 10 || !soDienThoai.StartsWith("0") || !soDienThoai.All(char.IsDigit))
+            {
+                MessageBox.Show("Số điện thoại không hợp lệ! Phải là 10 chữ số và bắt đầu bằng 0.", "Lỗi định dạng", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // 3. Ràng buộc "Số điện thoại duy nhất"
+            if (bllQLKH.KiemTraSoDienThoaiTonTai(soDienThoai))
+            {
+                MessageBox.Show($"Số điện thoại '{soDienThoai}' đã được đăng ký cho một khách hàng khác.", "Lỗi trùng lặp", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // --- KẾT THÚC PHẦN KIỂM TRA RÀNG BUỘC ---
+
+            // Nếu tất cả đều hợp lệ, tiến hành thêm mới
             string errorMessage = bllQLKH.ThemKhachHang(tenKH, diaChi, soDienThoai, gioiTinh);
 
             if (errorMessage == null)
             {
-                MessageBox.Show("Thêm khách hàng thành công!");
+                MessageBox.Show("Thêm khách hàng thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 HienThiKhachHangLenListView();
                 ClearInputFields();
             }
             else
             {
-                MessageBox.Show(errorMessage, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(errorMessage, "Lỗi từ CSDL", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -127,37 +146,60 @@ namespace QLST.Controls
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            string maKH =int.Parse(txtMaKH.Text).ToString();
+            // --- BẮT ĐẦU PHẦN KIỂM TRA RÀNG BUỘC ---
+
+            // 1. Ràng buộc "Phải chọn khách hàng"
+            if (string.IsNullOrWhiteSpace(txtMaKH.Text))
+            {
+                MessageBox.Show("Vui lòng chọn một khách hàng từ danh sách để sửa!", "Chưa chọn khách hàng", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Lấy thông tin từ các control
+            int maKH = int.Parse(txtMaKH.Text);
             string tenKH = txtTenKH.Text;
             string diaChi = txtDiachi.Text;
             string soDienThoai = txtSodienthoai.Text;
             string gioiTinh = cmbGioitinh.Text;
 
-            // Kiểm tra xem các trường thông tin có hợp lệ không
-            if (string.IsNullOrWhiteSpace(maKH) || string.IsNullOrWhiteSpace(tenKH) || string.IsNullOrWhiteSpace(diaChi) || string.IsNullOrWhiteSpace(soDienThoai) || string.IsNullOrWhiteSpace(gioiTinh))
+            // 2. Ràng buộc "Không được để trống"
+            if (string.IsNullOrWhiteSpace(tenKH) || string.IsNullOrWhiteSpace(diaChi) ||
+                string.IsNullOrWhiteSpace(soDienThoai) || string.IsNullOrWhiteSpace(gioiTinh))
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin khách hàng!", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Hiển thị hộp thoại xác nhận
-            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn sửa thông tin khách hàng này không?", "Xác nhận sửa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            // 3. Ràng buộc "Định dạng Số điện thoại"
+            if (soDienThoai.Length != 10 || !soDienThoai.StartsWith("0") || !soDienThoai.All(char.IsDigit))
             {
-                // Cập nhật thông tin khách hàng trong cơ sở dữ liệu
-                if (bllQLKH.CapNhatKhachHang(maKH, tenKH, diaChi, soDienThoai, gioiTinh))
-                {
-                    MessageBox.Show("Cập nhật khách hàng thành công!");
-                    HienThiKhachHangLenListView(); // Cập nhật danh sách khách hàng
-                    ClearInputFields(); // Xóa nội dung trong các TextBox
-                }
-                else
-                {
-                    MessageBox.Show("Cập nhật khách hàng thất bại!");
-                }
+                MessageBox.Show("Số điện thoại không hợp lệ! Phải là 10 chữ số và bắt đầu bằng 0.", "Lỗi định dạng", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
+            // 4. Ràng buộc "Số điện thoại duy nhất" (khi cập nhật)
+            // Truyền MaKH vào để BLL không kiểm tra trùng với chính khách hàng này
+            if (bllQLKH.KiemTraSoDienThoaiTonTai(soDienThoai, maKH))
+            {
+                MessageBox.Show($"Số điện thoại '{soDienThoai}' đã được đăng ký cho một khách hàng khác.", "Lỗi trùng lặp", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // --- KẾT THÚC PHẦN KIỂM TRA RÀNG BUỘC ---
+
+            // Nếu hợp lệ, tiến hành cập nhật
+            string errorMessage = bllQLKH.CapNhatKhachHang(maKH, tenKH, diaChi, soDienThoai, gioiTinh);
+
+            if (errorMessage == null)
+            {
+                MessageBox.Show("Cập nhật thông tin khách hàng thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                HienThiKhachHangLenListView();
+                ClearInputFields();
+            }
+            else
+            {
+                MessageBox.Show(errorMessage, "Lỗi từ CSDL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

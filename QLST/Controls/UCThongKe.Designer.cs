@@ -158,6 +158,7 @@
             this.btnShow.TabIndex = 3;
             this.btnShow.Text = "Show";
             this.btnShow.UseVisualStyleBackColor = false;
+            this.btnShow.Click += new System.EventHandler(this.BtnShow_Click);
             // 
             // tableLayoutPanel10
             // 
@@ -623,12 +624,6 @@
             this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Hàng bán chạy",
-            "Hàng tồn kho quá 1 tháng",
-            "Hàng sắp hết",
-            "hàng sắp hết hạn",
-            "Hàng chưa nhập"});
             this.comboBox1.Location = new System.Drawing.Point(189, 11);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 11, 4, 4);
             this.comboBox1.Name = "comboBox1";
@@ -761,6 +756,7 @@
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(182, 23);
             this.dateTimePicker2.TabIndex = 3;
+            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.DateTimePickers_ValueChanged);
             // 
             // label3
             // 
@@ -796,6 +792,7 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(166, 23);
             this.dateTimePicker1.TabIndex = 2;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.DateTimePickers_ValueChanged);
             // 
             // tableLayoutPanel8
             // 
@@ -821,6 +818,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UCThongKe";
             this.Size = new System.Drawing.Size(1367, 798);
+            this.Load += new System.EventHandler(this.UCThongKe_Load);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
             this.tableLayoutPanel10.ResumeLayout(false);

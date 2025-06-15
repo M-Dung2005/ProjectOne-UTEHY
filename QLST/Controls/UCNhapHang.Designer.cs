@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnThem = new Guna.UI2.WinForms.Guna2Button();
             this.txtSoluong = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtMahang = new Guna.UI2.WinForms.Guna2TextBox();
@@ -43,6 +44,10 @@
             this.guna2GroupBox3 = new Guna.UI2.WinForms.Guna2GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.dgvNhaphang = new System.Windows.Forms.DataGridView();
+            this.Maloai = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mahang = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tensp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Soluong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnLuuHoaDon = new Guna.UI2.WinForms.Guna2Button();
             this.cmbNhanVien = new Guna.UI2.WinForms.Guna2ComboBox();
             this.dtpNgaynhap = new Guna.UI2.WinForms.Guna2DateTimePicker();
@@ -53,10 +58,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.guna2GroupBox1 = new Guna.UI2.WinForms.Guna2GroupBox();
-            this.Maloai = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mahang = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tensp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Soluong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.guna2GroupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNhaphang)).BeginInit();
             this.guna2GroupBox1.SuspendLayout();
@@ -262,6 +263,19 @@
             // 
             // dgvNhaphang
             // 
+            this.dgvNhaphang.AllowUserToAddRows = false;
+            this.dgvNhaphang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvNhaphang.BackgroundColor = System.Drawing.Color.White;
+            this.dgvNhaphang.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvNhaphang.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Nunito", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvNhaphang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvNhaphang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvNhaphang.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Maloai,
@@ -269,12 +283,38 @@
             this.Tensp,
             this.Soluong});
             this.dgvNhaphang.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvNhaphang.GridColor = System.Drawing.SystemColors.ControlLight;
             this.dgvNhaphang.Location = new System.Drawing.Point(459, 185);
             this.dgvNhaphang.Name = "dgvNhaphang";
             this.dgvNhaphang.RowHeadersWidth = 51;
-            this.dgvNhaphang.RowTemplate.Height = 24;
+            this.dgvNhaphang.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Nunito", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvNhaphang.RowTemplate.Height = 30;
             this.dgvNhaphang.Size = new System.Drawing.Size(697, 631);
             this.dgvNhaphang.TabIndex = 5;
+            // 
+            // Maloai
+            // 
+            this.Maloai.HeaderText = "Mã loại";
+            this.Maloai.MinimumWidth = 6;
+            this.Maloai.Name = "Maloai";
+            // 
+            // Mahang
+            // 
+            this.Mahang.HeaderText = "Mã hàng";
+            this.Mahang.MinimumWidth = 6;
+            this.Mahang.Name = "Mahang";
+            // 
+            // Tensp
+            // 
+            this.Tensp.HeaderText = "Tên SP";
+            this.Tensp.MinimumWidth = 6;
+            this.Tensp.Name = "Tensp";
+            // 
+            // Soluong
+            // 
+            this.Soluong.HeaderText = "Số lượng";
+            this.Soluong.MinimumWidth = 6;
+            this.Soluong.Name = "Soluong";
             // 
             // btnLuuHoaDon
             // 
@@ -338,12 +378,12 @@
             this.txtMaHDN.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtMaHDN.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtMaHDN.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtMaHDN.Location = new System.Drawing.Point(572, 48);
+            this.txtMaHDN.Location = new System.Drawing.Point(572, 56);
             this.txtMaHDN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtMaHDN.Name = "txtMaHDN";
             this.txtMaHDN.PlaceholderText = "";
             this.txtMaHDN.SelectedText = "";
-            this.txtMaHDN.Size = new System.Drawing.Size(219, 36);
+            this.txtMaHDN.Size = new System.Drawing.Size(229, 36);
             this.txtMaHDN.TabIndex = 1;
             // 
             // txtMaNCC
@@ -428,38 +468,10 @@
             this.guna2GroupBox1.TabIndex = 4;
             this.guna2GroupBox1.Text = "Thông tin hóa đơn";
             // 
-            // Maloai
-            // 
-            this.Maloai.HeaderText = "Mã loại";
-            this.Maloai.MinimumWidth = 6;
-            this.Maloai.Name = "Maloai";
-            this.Maloai.Width = 125;
-            // 
-            // Mahang
-            // 
-            this.Mahang.HeaderText = "Mã hàng";
-            this.Mahang.MinimumWidth = 6;
-            this.Mahang.Name = "Mahang";
-            this.Mahang.Width = 125;
-            // 
-            // Tensp
-            // 
-            this.Tensp.HeaderText = "Tên SP";
-            this.Tensp.MinimumWidth = 6;
-            this.Tensp.Name = "Tensp";
-            this.Tensp.Width = 125;
-            // 
-            // Soluong
-            // 
-            this.Soluong.HeaderText = "Số lượng";
-            this.Soluong.MinimumWidth = 6;
-            this.Soluong.Name = "Soluong";
-            this.Soluong.Width = 125;
-            // 
             // UCNhapHang
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.dgvNhaphang);
             this.Controls.Add(this.guna2GroupBox3);
             this.Controls.Add(this.guna2GroupBox1);

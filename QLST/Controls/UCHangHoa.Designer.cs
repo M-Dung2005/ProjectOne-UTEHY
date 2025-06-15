@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtMaNCC = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtMahanghoa = new Guna.UI2.WinForms.Guna2TextBox();
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.btnNhaphang = new Guna.UI2.WinForms.Guna2Button();
             this.cmbMaloai = new Guna.UI2.WinForms.Guna2ComboBox();
             this.txtDongia = new Guna.UI2.WinForms.Guna2TextBox();
             this.dtpHSD = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.txtTenHang = new Guna.UI2.WinForms.Guna2TextBox();
+            this.dtpNgaysanxuat = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnXoa = new Guna.UI2.WinForms.Guna2Button();
             this.btnCapNhat = new Guna.UI2.WinForms.Guna2Button();
             this.btnThem = new Guna.UI2.WinForms.Guna2Button();
-            this.dtpNgaysanxuat = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.dgvHanghoa = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.btnNhaphang = new Guna.UI2.WinForms.Guna2Button();
             this.tableLayout.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -87,6 +87,7 @@
             this.txtMahanghoa.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtMahanghoa.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtMahanghoa.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMahanghoa.Enabled = false;
             this.txtMahanghoa.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtMahanghoa.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtMahanghoa.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
@@ -111,8 +112,8 @@
             this.tableLayout.Controls.Add(this.txtMahanghoa, 0, 0);
             this.tableLayout.Controls.Add(this.txtTenHang, 0, 1);
             this.tableLayout.Controls.Add(this.txtMaNCC, 0, 2);
-            this.tableLayout.Controls.Add(this.panel1, 0, 7);
             this.tableLayout.Controls.Add(this.dtpNgaysanxuat, 0, 4);
+            this.tableLayout.Controls.Add(this.panel1, 0, 7);
             this.tableLayout.Dock = System.Windows.Forms.DockStyle.Left;
             this.tableLayout.Location = new System.Drawing.Point(0, 0);
             this.tableLayout.Margin = new System.Windows.Forms.Padding(4);
@@ -129,6 +130,27 @@
             this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.tableLayout.Size = new System.Drawing.Size(403, 726);
             this.tableLayout.TabIndex = 19;
+            // 
+            // btnNhaphang
+            // 
+            this.btnNhaphang.AutoRoundedCorners = true;
+            this.btnNhaphang.BorderRadius = 25;
+            this.btnNhaphang.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnNhaphang.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnNhaphang.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnNhaphang.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnNhaphang.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnNhaphang.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnNhaphang.Font = new System.Drawing.Font("Nunito", 10.2F, System.Drawing.FontStyle.Bold);
+            this.btnNhaphang.ForeColor = System.Drawing.Color.White;
+            this.btnNhaphang.Location = new System.Drawing.Point(3, 672);
+            this.btnNhaphang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnNhaphang.MaximumSize = new System.Drawing.Size(395, 54);
+            this.btnNhaphang.Name = "btnNhaphang";
+            this.btnNhaphang.Size = new System.Drawing.Size(395, 52);
+            this.btnNhaphang.TabIndex = 23;
+            this.btnNhaphang.Text = "Nhập hàng ";
+            this.btnNhaphang.Click += new System.EventHandler(this.btnNhapHang_Click);
             // 
             // cmbMaloai
             // 
@@ -215,15 +237,34 @@
             this.txtTenHang.TabIndex = 16;
             this.txtTenHang.TextOffset = new System.Drawing.Point(5, 0);
             // 
+            // dtpNgaysanxuat
+            // 
+            this.dtpNgaysanxuat.AutoRoundedCorners = true;
+            this.dtpNgaysanxuat.Checked = true;
+            this.dtpNgaysanxuat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtpNgaysanxuat.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.dtpNgaysanxuat.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.dtpNgaysanxuat.Format = System.Windows.Forms.DateTimePickerFormat.Long;
+            this.dtpNgaysanxuat.Location = new System.Drawing.Point(3, 258);
+            this.dtpNgaysanxuat.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
+            this.dtpNgaysanxuat.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.dtpNgaysanxuat.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpNgaysanxuat.Name = "dtpNgaysanxuat";
+            this.dtpNgaysanxuat.Size = new System.Drawing.Size(397, 42);
+            this.dtpNgaysanxuat.TabIndex = 20;
+            this.dtpNgaysanxuat.TextOffset = new System.Drawing.Point(5, 0);
+            this.dtpNgaysanxuat.Value = new System.DateTime(2025, 5, 29, 4, 26, 9, 7);
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.btnThem);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(4, 438);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
-            this.panel1.Size = new System.Drawing.Size(392, 228);
+            this.panel1.Size = new System.Drawing.Size(395, 228);
             this.panel1.TabIndex = 18;
             // 
             // panel2
@@ -231,11 +272,11 @@
             this.panel2.Controls.Add(this.btnXoa);
             this.panel2.Controls.Add(this.btnCapNhat);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(13, 71);
+            this.panel2.Location = new System.Drawing.Point(13, 65);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(0, 12, 0, 0);
-            this.panel2.Size = new System.Drawing.Size(366, 145);
+            this.panel2.Size = new System.Drawing.Size(369, 151);
             this.panel2.TabIndex = 20;
             // 
             // btnXoa
@@ -254,7 +295,7 @@
             this.btnXoa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnXoa.MaximumSize = new System.Drawing.Size(395, 54);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(183, 54);
+            this.btnXoa.Size = new System.Drawing.Size(186, 54);
             this.btnXoa.TabIndex = 23;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
@@ -283,7 +324,7 @@
             // btnThem
             // 
             this.btnThem.AutoRoundedCorners = true;
-            this.btnThem.BorderRadius = 28;
+            this.btnThem.BorderRadius = 25;
             this.btnThem.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnThem.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnThem.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -295,50 +336,32 @@
             this.btnThem.Location = new System.Drawing.Point(13, 12);
             this.btnThem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(366, 59);
+            this.btnThem.Size = new System.Drawing.Size(369, 53);
             this.btnThem.TabIndex = 19;
             this.btnThem.Text = "Thêm hàng";
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
-            // dtpNgaysanxuat
-            // 
-            this.dtpNgaysanxuat.AutoRoundedCorners = true;
-            this.dtpNgaysanxuat.Checked = true;
-            this.dtpNgaysanxuat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtpNgaysanxuat.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.dtpNgaysanxuat.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.dtpNgaysanxuat.Format = System.Windows.Forms.DateTimePickerFormat.Long;
-            this.dtpNgaysanxuat.Location = new System.Drawing.Point(3, 258);
-            this.dtpNgaysanxuat.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
-            this.dtpNgaysanxuat.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.dtpNgaysanxuat.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            this.dtpNgaysanxuat.Name = "dtpNgaysanxuat";
-            this.dtpNgaysanxuat.Size = new System.Drawing.Size(397, 42);
-            this.dtpNgaysanxuat.TabIndex = 20;
-            this.dtpNgaysanxuat.TextOffset = new System.Drawing.Point(5, 0);
-            this.dtpNgaysanxuat.Value = new System.DateTime(2025, 5, 29, 4, 26, 9, 7);
-            // 
             // dgvHanghoa
             // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.dgvHanghoa.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvHanghoa.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.dgvHanghoa.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvHanghoa.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvHanghoa.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvHanghoa.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvHanghoa.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvHanghoa.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvHanghoa.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvHanghoa.Location = new System.Drawing.Point(403, 0);
@@ -373,27 +396,6 @@
             this.dgvHanghoa.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvHanghoa.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHanghoa_CellClick);
             this.dgvHanghoa.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvHanghoa_CellFormatting);
-            // 
-            // btnNhaphang
-            // 
-            this.btnNhaphang.AutoRoundedCorners = true;
-            this.btnNhaphang.BorderRadius = 25;
-            this.btnNhaphang.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnNhaphang.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnNhaphang.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnNhaphang.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnNhaphang.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnNhaphang.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.btnNhaphang.Font = new System.Drawing.Font("Nunito", 10.2F, System.Drawing.FontStyle.Bold);
-            this.btnNhaphang.ForeColor = System.Drawing.Color.White;
-            this.btnNhaphang.Location = new System.Drawing.Point(3, 672);
-            this.btnNhaphang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnNhaphang.MaximumSize = new System.Drawing.Size(395, 54);
-            this.btnNhaphang.Name = "btnNhaphang";
-            this.btnNhaphang.Size = new System.Drawing.Size(395, 52);
-            this.btnNhaphang.TabIndex = 23;
-            this.btnNhaphang.Text = "Nhập hàng ";
-            this.btnNhaphang.Click += new System.EventHandler(this.btnNhapHang_Click);
             // 
             // UCHangHoa
             // 

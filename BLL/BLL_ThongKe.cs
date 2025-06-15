@@ -9,6 +9,7 @@ namespace BLL
     {
         private readonly Database db = new Database();
 
+
         public DataTable ThongKeNhapXuat(DateTime fromDate, DateTime toDate, int? maLoai, int? maNCC)
         {
             db.OpenDB();
@@ -36,7 +37,7 @@ namespace BLL
             SELECT
                 'Xuat' AS LoaiGiaoDich,
                 hdx.MaHDX AS MaPhieu,
-                hdx.NgayLap AS NgayTao,
+                hdx.NgayTao AS NgayTao,
                 hh.MaHang,
                 hh.TenHang,
                 ct.SoLuong,
@@ -45,7 +46,7 @@ namespace BLL
             FROM HoaDonXuat hdx
             JOIN ChiTietHoaDonXuat ct ON hdx.MaHDX = ct.MaHDX
             JOIN HangHoa hh ON ct.MaHang = hh.MaHang
-            WHERE hdx.NgayLap BETWEEN @FromDate AND @ToDate
+            WHERE hdx.NgayTao BETWEEN @FromDate AND @ToDate
               AND (@MaLoai IS NULL OR hh.MaLoai = @MaLoai)";
 
             SqlCommand cmd = new SqlCommand(sql, db.conn);

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Windows.Forms;
-using DTO;
 using QLST.Controls;
 
 namespace QLST
@@ -15,8 +13,7 @@ namespace QLST
         UserControl ucQLKH = new UCQLKH();
         UserControl ucQLUser = new UCQLUser();
         UserControl ucThongKe = new UCThongKe();
-        UserControl ucBanHang;
-        UserControl ucThanhToan = new UCThanhToan();
+        UserControl ucBanHang = new UCBanHang();
         UserControl ucChiTietHoaDonNhap = new UCChitiethoadonNhap();
         UserControl ucChiTietHoaDonXuat = new UCChitiethoadonxuat();
         UserControl ucNhapHang = new UCNhapHang();
@@ -26,9 +23,8 @@ namespace QLST
 
             tkLabel.Text = tenTK;
             quyenLabel.Text = quyen;
-            ucBanHang = new UCBanHang();
-            ((UCBanHang)ucBanHang).InvoiceCreated += FrmMain_InvoiceCreated;
-
+            ((UCBanHang)ucBanHang).InvoiceCreated += (s, e) => FrmMain_InvoiceCreated(0);
+            ((UCNhapHang)ucNhapHang).ImportInvoiceCreated += (s, e) => FrmMain_InvoiceCreated(1);
         }
 
         public void ShowChiTietHoaDonXuat(int maHDX)
@@ -54,10 +50,11 @@ namespace QLST
         }
 
         // Đây là phương thức sẽ được chạy khi hóa đơn được tạo thành công
-        private void FrmMain_InvoiceCreated(object sender, EventArgs e)
+        private void FrmMain_InvoiceCreated(int index)
         {
             // Ra lệnh cho ucHoaDon phải tải lại dữ liệu
             // Cần ép kiểu ucHoaDon về đúng loại của nó (UCHoaDon)
+            ((UCHoaDon)ucHoaDon).tabControl1.SelectedIndex = index; // Chọn tab tương ứng với hóa đơn mới tạo
             ((UCHoaDon)ucHoaDon).RefreshData();
 
             // Tùy chọn: Tự động chuyển người dùng đến tab Hóa đơn để xem kết quả
@@ -81,11 +78,7 @@ namespace QLST
             HideUCtrl();
             ucChiTietHoaDonNhap.Show();
         }
-        public void LoadUCThanhToan()
-        {
-            HideUCtrl();
-            ucThanhToan.Show();
-        }
+       
 
         private void HideUCtrl()
         {
@@ -106,7 +99,6 @@ namespace QLST
             clientArea.Controls.Add(ucQLUser);
             clientArea.Controls.Add(ucThongKe);
             clientArea.Controls.Add(ucBanHang);
-            clientArea.Controls.Add(ucThanhToan);
             clientArea.Controls.Add(ucChiTietHoaDonNhap);
             clientArea.Controls.Add(ucChiTietHoaDonXuat);
             clientArea.Controls.Add(ucNhapHang);

@@ -45,6 +45,20 @@ namespace BLL
                 db.CloseDB();
             }
         }
+
+        public bool KiemTraSoDienThoaiTonTai(string soDienThoai, int maKH = 0)
+        {
+            db.OpenDB();
+            // Nếu maKH = 0 (thêm mới), kiểm tra SĐT trên toàn bộ bảng
+            // Nếu maKH > 0 (cập nhật), kiểm tra SĐT trên các khách hàng khác
+            string sql = "SELECT COUNT(*) FROM KhachHang WHERE SoDienThoai = @SoDienThoai AND MaKH != @MaKH";
+            SqlCommand cmd = new SqlCommand(sql, db.conn);
+            cmd.Parameters.AddWithValue("@SoDienThoai", soDienThoai);
+            cmd.Parameters.AddWithValue("@MaKH", maKH);
+            int count = (int)cmd.ExecuteScalar();
+            db.CloseDB();
+            return count > 0;
+        }
         // Lấy danh sách khách hàng từ cơ sở dữ liệu
         public DataTable LayDanhSachKhachHang()
         {

@@ -44,55 +44,85 @@ namespace QLST.Controls
             txtDongia.Clear();
         }
 
+        // Trong file QLST/Controls/UCHangHoa.cs
+
         private void btnThem_Click(object sender, EventArgs e)
         {
-            // 1. Kiểm tra và chuyển đổi dữ liệu đầu vào
+            // === BẮT ĐẦU PHẦN KIỂM TRA RÀNG BUỘC ===
+
+            // 1. Ràng buộc "Không được để trống"
             if (string.IsNullOrWhiteSpace(txtTenHang.Text) ||
                 cmbMaloai.SelectedValue == null ||
                 string.IsNullOrWhiteSpace(txtMaNCC.Text) ||
                 string.IsNullOrWhiteSpace(txtDongia.Text))
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin (Tên hàng, Loại hàng, Mã NCC, Đơn giá)!", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập đầy đủ các thông tin bắt buộc!", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            // 2. Ràng buộc "Kiểu dữ liệu"
             if (!int.TryParse(txtMaNCC.Text, out int maNCC))
             {
                 MessageBox.Show("Mã Nhà cung cấp phải là một con số!", "Lỗi định dạng", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (!decimal.TryParse(txtDongia.Text, out decimal donGia))
+            if (!decimal.TryParse(txtDongia.Text, out decimal donGia) || donGia < 0)
             {
-                MessageBox.Show("Đơn giá phải là một con số!", "Lỗi định dạng", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Đơn giá phải là một số không âm!", "Lỗi định dạng", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // 2. Tạo đối tượng DTO để gửi đi
+            // 3. Ràng buộc "Logic ngày tháng"
+            if (dtpHSD.Value <= dtpNgaysanxuat.Value)
+            {
+                MessageBox.Show("Hạn sử dụng phải sau Ngày sản xuất.", "Lỗi logic", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // 4. Ràng buộc "Tham chiếu" (Kiểm tra sự tồn tại của Mã Loại và Mã NCC)
+            int maLoai = Convert.ToInt32(cmbMaloai.SelectedValue);
+
+            // Tạo instance mới của BLL để kiểm tra
+            if (!new BLL_LoaiHang().KiemTraLoaiHangTonTai(maLoai))
+            {
+                MessageBox.Show($"Mã loại '{maLoai}' không tồn tại. Vui lòng chọn lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!new BLL_NhaCungCap().KiemTraNhaCungCapTonTai(maNCC))
+            {
+                MessageBox.Show($"Mã nhà cung cấp '{maNCC}' không tồn tại. Vui lòng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // === KẾT THÚC PHẦN KIỂM TRA RÀNG BUỘC ===
+
+
+            // Nếu tất cả ràng buộc đều hợp lệ, tiến hành thêm mới
             HangHoa hh = new HangHoa
             {
                 TenHang = txtTenHang.Text,
-                MaNCC = maNCC, // Lấy giá trị từ TextBox đã được chuyển đổi
-                MaLoai = Convert.ToInt32(cmbMaloai.SelectedValue),
+                MaNCC = maNCC,
+                MaLoai = maLoai,
                 NgaySanXuat = dtpNgaysanxuat.Value,
                 HanSuDung = dtpHSD.Value,
                 DonGia = donGia
             };
 
-            // 3. Gọi BLL và xử lý kết quả
+            // Gọi BLL để thêm vào CSDL (giả sử đã sửa BLL trả về string lỗi)
             string errorMessage = bllHangHoa.ThemHangHoa(hh);
 
             if (errorMessage == null)
             {
-                MessageBox.Show("Thêm hàng hóa thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);            
+                MessageBox.Show("Thêm hàng hóa thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dgvHanghoa.DataSource = bllHangHoa.LayDanhSachHangHoa();
                 ClearInputFields();
             }
             else
             {
-                MessageBox.Show(errorMessage, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Hiển thị lỗi từ BLL (nếu có lỗi từ CSDL mà code C# chưa bắt được)
+                MessageBox.Show(errorMessage, "Lỗi từ CSDL", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
-
         }
 
         private void UCHangHoa_Load(object sender, EventArgs e)
@@ -133,40 +163,84 @@ namespace QLST.Controls
 
         private void btnCapNhat_Click(object sender, EventArgs e)
         {
-            foreach (Guna2TextBox ctrl in tableLayout.Controls.OfType<Guna2TextBox>())
+            // === BẮT ĐẦU PHẦN KIỂM TRA RÀNG BUỘC ===
+
+            // 1. Ràng buộc "Phải chọn một hàng hóa"
+            if (string.IsNullOrWhiteSpace(txtMahanghoa.Text))
             {
-                if (string.IsNullOrWhiteSpace(ctrl.Text))
-                {
-                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
-                    return;
-                }
+                MessageBox.Show("Vui lòng chọn một mặt hàng từ danh sách để cập nhật!", "Chưa chọn hàng hóa", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
+            // 2. Ràng buộc "Không được để trống"
+            if (string.IsNullOrWhiteSpace(txtTenHang.Text) ||
+                cmbMaloai.SelectedValue == null ||
+                string.IsNullOrWhiteSpace(txtMaNCC.Text) ||
+                string.IsNullOrWhiteSpace(txtDongia.Text))
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ các thông tin bắt buộc!", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 3. Ràng buộc "Kiểu dữ liệu"
+            if (!int.TryParse(txtMaNCC.Text, out int maNCC))
+            {
+                MessageBox.Show("Mã Nhà cung cấp phải là một con số!", "Lỗi định dạng", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!decimal.TryParse(txtDongia.Text, out decimal donGia) || donGia < 0)
+            {
+                MessageBox.Show("Đơn giá phải là một số không âm!", "Lỗi định dạng", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // 4. Ràng buộc "Logic ngày tháng"
+            if (dtpHSD.Value <= dtpNgaysanxuat.Value)
+            {
+                MessageBox.Show("Hạn sử dụng phải sau Ngày sản xuất.", "Lỗi logic", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // 5. Ràng buộc "Tham chiếu" (Kiểm tra sự tồn tại)
+            int maLoai = Convert.ToInt32(cmbMaloai.SelectedValue);
+            if (!new BLL_LoaiHang().KiemTraLoaiHangTonTai(maLoai))
+            {
+                MessageBox.Show($"Mã loại '{maLoai}' không tồn tại. Vui lòng chọn lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!new BLL_NhaCungCap().KiemTraNhaCungCapTonTai(maNCC))
+            {
+                MessageBox.Show($"Mã nhà cung cấp '{maNCC}' không tồn tại. Vui lòng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // === KẾT THÚC PHẦN KIỂM TRA RÀNG BUỘC ===
+
+
+            // Nếu tất cả ràng buộc đều hợp lệ, tiến hành cập nhật
             HangHoa hh = new HangHoa
             {
-                MaHang = Convert.ToInt32(txtMahanghoa.Text),
+                MaHang = int.Parse(txtMahanghoa.Text), // Lấy mã hàng đang được chọn
                 TenHang = txtTenHang.Text,
-                MaLoai = int.Parse(cmbMaloai.Text),
-                MaNCC = int.Parse(txtMaNCC.Text),
-                NgaySanXuat = DateTime.Now,
-                HanSuDung = DateTime.Now.AddMonths(6), // Giả sử hạn sử dụng là 6 tháng kể từ ngày sản xuất
-                DonGia = decimal.Parse(cmbMaloai.Text),
+                MaNCC = maNCC,
+                MaLoai = maLoai,
+                NgaySanXuat = dtpNgaysanxuat.Value,
+                HanSuDung = dtpHSD.Value,
+                DonGia = donGia
             };
 
-            bool kq = bllHangHoa.CapnhatHangHoa(hh);
+            string errorMessage = bllHangHoa.CapnhatHangHoa(hh);
 
-            if (kq)
+            if (errorMessage == null)
             {
-                MessageBox.Show("Cập nhật hàng hóa thành công!");
-                // Tải lại dữ liệu cho DataGridView
+                MessageBox.Show("Cập nhật hàng hóa thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dgvHanghoa.DataSource = bllHangHoa.LayDanhSachHangHoa();
                 ClearInputFields();
             }
             else
             {
-                MessageBox.Show("Cập nhật hàng hóa thất bại!");
+                MessageBox.Show(errorMessage, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
         private void dgvHanghoa_CellClick(object sender, DataGridViewCellEventArgs e)
         {

@@ -39,27 +39,27 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvBanHang = new System.Windows.Forms.DataGridView();
+            this.Maloai = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mahang = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tensp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dongia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Soluong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.guna2GroupBox3 = new Guna.UI2.WinForms.Guna2GroupBox();
             this.btnThem = new Guna.UI2.WinForms.Guna2Button();
             this.txtSoluong = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtDongia = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtMahang = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtMaloai = new Guna.UI2.WinForms.Guna2TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.cmbTensp = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.Maloai = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mahang = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tensp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dongia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Soluong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.guna2GroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBanHang)).BeginInit();
             this.guna2GroupBox3.SuspendLayout();
@@ -82,7 +82,7 @@
             this.guna2GroupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.guna2GroupBox1.Location = new System.Drawing.Point(0, 0);
             this.guna2GroupBox1.Name = "guna2GroupBox1";
-            this.guna2GroupBox1.Size = new System.Drawing.Size(1146, 185);
+            this.guna2GroupBox1.Size = new System.Drawing.Size(1146, 170);
             this.guna2GroupBox1.TabIndex = 0;
             this.guna2GroupBox1.Text = "Thông tin hóa đơn";
             // 
@@ -148,7 +148,7 @@
             this.txtMaHDX.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtMaHDX.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtMaHDX.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtMaHDX.Location = new System.Drawing.Point(572, 48);
+            this.txtMaHDX.Location = new System.Drawing.Point(572, 56);
             this.txtMaHDX.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtMaHDX.Name = "txtMaHDX";
             this.txtMaHDX.PlaceholderText = "";
@@ -219,6 +219,7 @@
             // 
             // dgvBanHang
             // 
+            this.dgvBanHang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvBanHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBanHang.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Maloai,
@@ -227,12 +228,42 @@
             this.Dongia,
             this.Soluong});
             this.dgvBanHang.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvBanHang.Location = new System.Drawing.Point(446, 185);
+            this.dgvBanHang.Location = new System.Drawing.Point(446, 170);
             this.dgvBanHang.Name = "dgvBanHang";
             this.dgvBanHang.RowHeadersWidth = 51;
             this.dgvBanHang.RowTemplate.Height = 24;
-            this.dgvBanHang.Size = new System.Drawing.Size(700, 504);
+            this.dgvBanHang.Size = new System.Drawing.Size(700, 519);
             this.dgvBanHang.TabIndex = 2;
+            // 
+            // Maloai
+            // 
+            this.Maloai.HeaderText = "Mã loại";
+            this.Maloai.MinimumWidth = 6;
+            this.Maloai.Name = "Maloai";
+            // 
+            // Mahang
+            // 
+            this.Mahang.HeaderText = "Mã hàng";
+            this.Mahang.MinimumWidth = 6;
+            this.Mahang.Name = "Mahang";
+            // 
+            // Tensp
+            // 
+            this.Tensp.HeaderText = "Tên SP";
+            this.Tensp.MinimumWidth = 6;
+            this.Tensp.Name = "Tensp";
+            // 
+            // Dongia
+            // 
+            this.Dongia.HeaderText = "Đơn giá";
+            this.Dongia.MinimumWidth = 6;
+            this.Dongia.Name = "Dongia";
+            // 
+            // Soluong
+            // 
+            this.Soluong.HeaderText = "Số lượng";
+            this.Soluong.MinimumWidth = 6;
+            this.Soluong.Name = "Soluong";
             // 
             // guna2GroupBox3
             // 
@@ -255,9 +286,9 @@
             this.guna2GroupBox3.Dock = System.Windows.Forms.DockStyle.Left;
             this.guna2GroupBox3.Font = new System.Drawing.Font("Nunito", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2GroupBox3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.guna2GroupBox3.Location = new System.Drawing.Point(0, 185);
+            this.guna2GroupBox3.Location = new System.Drawing.Point(0, 170);
             this.guna2GroupBox3.Name = "guna2GroupBox3";
-            this.guna2GroupBox3.Size = new System.Drawing.Size(446, 504);
+            this.guna2GroupBox3.Size = new System.Drawing.Size(446, 519);
             this.guna2GroupBox3.TabIndex = 3;
             this.guna2GroupBox3.Text = "Thông tin hàng hóa";
             // 
@@ -362,6 +393,15 @@
             this.txtMaloai.Size = new System.Drawing.Size(314, 33);
             this.txtMaloai.TabIndex = 2;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(493, -70);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(99, 28);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Ngày bán";
+            // 
             // label15
             // 
             this.label15.BackColor = System.Drawing.Color.White;
@@ -371,6 +411,15 @@
             this.label15.TabIndex = 1;
             this.label15.Text = "Số lượng";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(81, -70);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(141, 28);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Nhân viên bán";
             // 
             // label14
             // 
@@ -382,6 +431,15 @@
             this.label14.Text = "Đơn giá";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(493, -129);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(88, 28);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Mã HĐX";
+            // 
             // label13
             // 
             this.label13.BackColor = System.Drawing.Color.White;
@@ -391,6 +449,15 @@
             this.label13.TabIndex = 1;
             this.label13.Text = "Mã hàng";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(81, -129);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(73, 28);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Mã KH";
             // 
             // label12
             // 
@@ -428,77 +495,6 @@
             this.cmbTensp.Size = new System.Drawing.Size(314, 36);
             this.cmbTensp.TabIndex = 0;
             this.cmbTensp.SelectedIndexChanged += new System.EventHandler(this.cmbTensp_SelectedIndexChanged);
-            // 
-            // Maloai
-            // 
-            this.Maloai.HeaderText = "Mã loại";
-            this.Maloai.MinimumWidth = 6;
-            this.Maloai.Name = "Maloai";
-            this.Maloai.Width = 125;
-            // 
-            // Mahang
-            // 
-            this.Mahang.HeaderText = "Mã hàng";
-            this.Mahang.MinimumWidth = 6;
-            this.Mahang.Name = "Mahang";
-            this.Mahang.Width = 125;
-            // 
-            // Tensp
-            // 
-            this.Tensp.HeaderText = "Tên SP";
-            this.Tensp.MinimumWidth = 6;
-            this.Tensp.Name = "Tensp";
-            this.Tensp.Width = 125;
-            // 
-            // Dongia
-            // 
-            this.Dongia.HeaderText = "Đơn giá";
-            this.Dongia.MinimumWidth = 6;
-            this.Dongia.Name = "Dongia";
-            this.Dongia.Width = 125;
-            // 
-            // Soluong
-            // 
-            this.Soluong.HeaderText = "Số lượng";
-            this.Soluong.MinimumWidth = 6;
-            this.Soluong.Name = "Soluong";
-            this.Soluong.Width = 125;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(81, -129);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 28);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Mã KH";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(493, -129);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(88, 28);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Mã HĐX";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(81, -70);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(141, 28);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Nhân viên bán";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(493, -70);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(99, 28);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Ngày bán";
             // 
             // UCBanHang
             // 

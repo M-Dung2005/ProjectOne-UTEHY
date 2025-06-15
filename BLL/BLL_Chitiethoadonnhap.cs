@@ -30,7 +30,7 @@ namespace BLL
         JOIN HangHoa hh ON cthdn.MaHang = hh.MaHang
         WHERE cthdn.MaHDN = @MaHDN";
             SqlCommand cmd = new SqlCommand(sql, db.conn);
-            cmd.Parameters.AddWithValue("@MaHDX", maHDN);
+            cmd.Parameters.AddWithValue("@MaHDN", maHDN);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
